@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Video - DeepVision Soccer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Minimal modal styles kept inline */
+    .player-modal { position: fixed; inset: 0; background: rgba(0,0,0,.75); display: none; align-items: center; justify-content: center; z-index: 2000; backdrop-filter: blur(4px); }
+    .player-shell { width: min(1100px, 92vw); background: #0b0f1a; border: 1px solid rgba(255,255,255,.12); border-radius: 16px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,.45); display: grid; grid-template-rows: auto 1fr auto; }
+    .player-header,.player-footer { padding: .75rem 1rem; display: flex; align-items: center; justify-content: space-between; color: #e5e7eb; background: linear-gradient(180deg,#0f172a,#0b1022); }
+    .player-title { font-weight: 800; letter-spacing: .3px; }
+    .player-close { border: none; background: #fff; color: #111827; font-weight: 800; padding: .4rem .8rem; border-radius: 999px; cursor: pointer; }
+    .player-body { background: #000; display: flex; align-items: center; justify-content: center; }
+    .player-video { width: 100%; height: 62vh; background: #000; }
+    .player-actions { display: flex; gap: .5rem; }
+    .player-btn { padding: .5rem .9rem; border-radius: 999px; border: 2px solid #e5e7eb; background: #fff; color: #111827; font-weight: 700; cursor: pointer; }
+    .player-btn.primary { background: linear-gradient(135deg,#dc2626,#b91c1c); color: #fff; border: none; }
+    @media (max-width:640px){ .player-video{ height:50vh; } }
+
+    /* Tiny badge style for Delete */
+    .uv-btn.danger {
+      background: linear-gradient(135deg,#0b0f1a,#1f2937);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    }
+    .uv-btn.danger:hover { transform: translateY(-1px) scale(1.02); }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">⚽</span>
+        <span class="logo-text">DeepVision Soccer</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="upload.html" class="nav-link active">Upload Video</a></li>
+        <li><a href="output.html" class="nav-link">Output</a></li>
+        <li><a href="standings.html" class="nav-link">Statistics</a></li>
+        <li><a href="fixtures.html" class="nav-link">Fixtures</a></li>
+        <li><a href="statistics.html" class="nav-link">Statistics</a></li>
+        
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Upload Section -->
+  <section class="upload-section">
+    <div class="upload-container">
+      <h1 class="page-title">Upload Football Match Video</h1>
+      <p class="page-subtitle">Upload your match footage for AI-powered analysis</p>
+
+      <!-- Upload Form -->
+      <div class="upload-card">
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-icon">📹</div>
+          <h3>Drag & Drop Video Here</h3>
+          <p>or</p>
+          <label for="videoInput" class="btn btn-primary">
+            Choose Video File
+          </label>
+          <input type="file" id="videoInput" accept="video/*" hidden>
+          <p class="upload-info">Supported formats: MP4, AVI, MOV (Max size: 500MB)</p>
+        </div>
+
+        <!-- Video Preview -->
+        <div class="video-preview" id="videoPreview" style="display: none;">
+          <h3>Video Preview</h3>
+          <video id="previewVideo" controls></video>
+          <div class="video-details" id="videoDetails"></div>
+          <button class="btn btn-primary" id="uploadBtn">
+            <span>🚀</span> Start Analysis
+          </button>
+          <button class="btn btn-primary" id="startTrackingBtn">
+            <span>🚀</span> Start Tracking
+          </button>
+          <button class="btn btn-secondary" id="cancelBtn">
+            <span>❌</span> Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Processing Status -->
+      <div class="processing-card" id="processingCard" style="display: none;">
+        <div class="processing-header">
+          <div class="processing-icon">⚙</div>
+          <h3>Processing Your Video...</h3>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-text" id="progressText">0%</p>
+        <div class="processing-steps">
+          <div class="step" id="step1">
+            <span class="step-icon">⏳</span>
+            <span>Uploading video...</span>
+          </div>
+          <div class="step" id="step2">
+            <span class="step-icon">⏳</span>
+            <span>Analyzing players...</span>
+          </div>
+          <div class="step" id="step3">
+            <span class="step-icon">⏳</span>
+            <span>Detecting tactics...</span>
+          </div>
+          <div class="step" id="step4">
+            <span class="step-icon">⏳</span>
+            <span>Generating insights...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Card -->
+      <div class="results-card" id="resultsCard" style="display: none;">
+        <div class="results-header">
+          <div class="success-icon">✅</div>
+          <h3>Analysis Complete!</h3>
+        </div>
+        <p class="results-message">Your video has been successfully analyzed.</p>
+
+        <div class="results-actions">
+          <button class="btn btn-primary" id="downloadBtn">
+            <span>⬇</span> Download Analyzed Video
+          </button>
+          <a href="statistics.html" class="btn btn-secondary">
+            <span>📊</span> View Statistics
+          </a>
+        </div>
+
+        <div class="results-info">
+          <div class="info-item">
+            <span class="info-label">Processing Time:</span>
+            <span class="info-value" id="processingTime">--</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Video Size:</span>
+            <span class="info-value" id="videoSize">--</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Duration:</span>
+            <span class="info-value" id="videoDuration">--</span>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary btn-small" id="uploadAnotherBtn">
+          <span>🔄</span> Upload Another Video
+        </button>
+      </div>
+
+      <!-- Uploaded Videos List -->
+      <div class="uploaded-videos" id="uploadedVideos">
+        <div class="uv-header">
+          <h2 class="uv-title">
+            <span class="folder">📂</span>
+            Uploaded Videos
+          </h2>
+          <div class="uv-actions">
+            <span class="uv-badge" id="uvCount">0 files</span>
+            <button id="openUploadedVideos" class="btn btn-secondary btn-small" type="button">Show</button>
+          </div>
+        </div>
+        <!-- The rows are injected by upload.js into this grid -->
+        <div id="videoList" class="uv-grid"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 DeepVision Soccer. Final Year Project.</p>
+  </footer>
+
+  <!-- Player Modal -->
+  <div class="player-modal" id="playerModal" aria-hidden="true">
+    <div class="player-shell">
+      <div class="player-header">
+        <div class="player-title" id="playerTitle">Now Playing</div>
+        <button class="player-close" id="playerClose">Close ✕</button>
+      </div>
+      <div class="player-body">
+        <video id="playerVideo" class="player-video" controls playsinline></video>
+      </div>
+      <div class="player-footer">
+        <div class="player-actions">
+          <button class="player-btn" id="playerOpenNewTab">Open in new tab</button>
+          <a class="player-btn primary" id="playerDownload" download>Download</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/upload.js"></script>
+  <script>
+    // Wire the "Show" button to list videos (function in upload.js)
+    document.addEventListener('DOMContentLoaded', () => {
+      const showBtn = document.getElementById('openUploadedVideos');
+      if (showBtn && typeof fetchUploadedVideos === 'function') {
+        showBtn.addEventListener('click', fetchUploadedVideos);
+      }
+
+      // Modal wiring
+      const modal = document.getElementById('playerModal');
+      const closeBtn = document.getElementById('playerClose');
+      const vidEl = document.getElementById('playerVideo');
+      const titleEl = document.getElementById('playerTitle');
+      const openTabBtn = document.getElementById('playerOpenNewTab');
+      const downloadA = document.getElementById('playerDownload');
+
+      closeBtn.addEventListener('click', () => {
+        vidEl.pause();
+        modal.style.display = 'none';
+      });
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          vidEl.pause();
+          modal.style.display = 'none';
+        }
+      });
+
+      // Expose a global player opener
+      window.openVideoPlayer = function(url, name='Video') {
+        vidEl.src = url;
+        titleEl.textContent = name;
+        openTabBtn.onclick = () => window.open(url, '_blank');
+        downloadA.href = url;
+        downloadA.setAttribute('download', name || 'video.mp4');
+        modal.style.display = 'flex';
+        vidEl.play().catch(()=>{});
+      };
+
+      // Expose a global delete helper the list can call
+      // Deletes on backend, then removes row and refreshes count
+      window.deleteVideoByName = async function(filename, rowEl) {
+        const BASE = 'http://127.0.0.1:5000';
+        if (!confirm(`Delete "${filename}" permanently?`)) return;
+
+        try {
+          const res = await fetch(`${BASE}/videos/${encodeURIComponent(filename)}`, { method: 'DELETE' });
+          const data = await res.json().catch(()=>({}));
+          if (!res.ok) {
+            alert(data.error || 'Failed to delete');
+            return;
+          }
+          // Remove the row visually
+          if (rowEl && rowEl.parentElement) {
+            rowEl.parentElement.removeChild(rowEl);
+          }
+          // Update count badge
+          if (typeof fetchUploadedVideos === 'function') {
+            fetchUploadedVideos();
+          }
+        } catch (e) {
+          alert('Network error while deleting');
+          console.error(e);
+        }
+      };
+    });
+  </script>
+</body>
+</html>

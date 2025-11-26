@@ -1,0 +1,18 @@
+# Core libs
+numpy
+opencv-python
+tqdm
+more-itertools
+
+# Deep learning / ML
+torch
+transformers
+umap-learn
+scikit-learn
+
+# Roboflow inference + sports
+inference-gpu
+git+https://github.com/roboflow/sports.git
+
+# Supervision (for tracking, annotators, etc.)
+supervision

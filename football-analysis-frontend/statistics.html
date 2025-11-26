@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Statistics - DeepVision Soccer</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">⚽</span>
+        <span class="logo-text">DeepVision Soccer</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="upload.html" class="nav-link">Upload Video</a></li>
+        <li><a href="output.html" class="nav-link">Output</a></li>
+        <li><a href="statistics.html" class="nav-link active">Statistics</a></li>
+        <li><a href="fixtures.html" class="nav-link">Fixtures</a></li>
+        <li><a href="standings.html" class="nav-link">Standings</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Statistics Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <h1 class="page-title">Player Statistics & Analysis</h1>
+      <p class="page-subtitle">Comprehensive match data and player performance metrics</p>
+
+      <!-- Global Controls (League / Season / IDs / Search) -->
+      <div class="controls-card">
+        <div class="controls-grid">
+          <div class="control-group">
+            <label for="statsLeague">League</label>
+            <select id="statsLeague">
+              <option value="EPL">Premier League</option>
+              <option value="LL">La Liga</option>
+              <option value="UCL">Champions League</option>
+              <option value="SA">Serie A</option>
+              <option value="BL">Bundesliga</option>
+              <option value="L1">Ligue 1</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="statsSeason">Season</label>
+            <select id="statsSeason">
+              <option value="2025">2025</option>
+              <option value="2024" selected>2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="teamId">Team ID</label>
+            <input id="teamId" type="number" placeholder="e.g., 33"/>
+          </div>
+          <div class="control-group">
+            <label for="playerId">Player ID</label>
+            <input id="playerId" type="number" placeholder="e.g., 276"/>
+          </div>
+          <div class="control-group wide">
+            <label for="playerSearch">Search (player/coach)</label>
+            <input id="playerSearch" type="text" placeholder="e.g., neymar or Klopp"/>
+          </div>
+        </div>
+
+        <div class="actions-row">
+          <button id="btnProfiles" class="btn btn-primary">🔎 Player Profiles</button>
+          <button id="btnPlayerStats" class="btn btn-primary">📈 Player Stats</button>
+          <button id="btnSquad" class="btn btn-secondary">👥 Team Squad</button>
+          <button id="btnCoach" class="btn btn-secondary">🧑‍🏫 Coaches</button>
+          <button id="btnTopScorers" class="btn btn-accent">🥇 Top Scorers</button>
+          <button id="btnTopAssists" class="btn btn-accent">🅰️ Top Assists</button>
+          <button id="btnTopYellow" class="btn btn-accent">🟨 Top Yellow</button>
+          <button id="btnTopRed" class="btn btn-accent">🟥 Top Red</button>
+          <button id="btnTransfers" class="btn btn-warning">🔁 Transfers</button>
+        </div>
+      </div>
+
+      <!-- Filter Buttons (visual categories) -->
+      <div class="stats-filters">
+        <button class="filter-btn active" data-filter="all">All Stats</button>
+        <button class="filter-btn" data-filter="players">Players</button>
+        <button class="filter-btn" data-filter="team">Team</button>
+        <button class="filter-btn" data-filter="tactical">Tactical</button>
+      </div>
+
+
+      <!-- Dynamic Result Blocks (filled by JS) -->
+      <div class="stats-table-card">
+        <div class="table-header"><h2>Player Profiles</h2></div>
+        <div id="outProfiles" class="table-wrapper"></div>
+      </div>
+
+      <div class="stats-table-card">
+        <div class="table-header"><h2>Player Statistics</h2></div>
+        <div id="outPlayerStats" class="table-wrapper"></div>
+      </div>
+
+      <div class="stats-table-card">
+        <div class="table-header"><h2>Team Squad</h2></div>
+        <div id="outSquad" class="table-wrapper"></div>
+      </div>
+
+      <div class="stats-table-card">
+        <div class="table-header"><h2>Coaches</h2></div>
+        <div id="outCoaches" class="table-wrapper"></div>
+      </div>
+
+      <div class="stats-table-card">
+        <div class="table-header"><h2>Leaderboards</h2></div>
+        <div id="outLeaders" class="table-wrapper"></div>
+      </div>
+
+      <div class="stats-table-card">
+        <div class="table-header"><h2>Transfers</h2></div>
+        <div id="outTransfers" class="table-wrapper"></div>
+      </div>
+
+      <!-- Tactical Insights -->
+      <div class="tactical-insights-card">
+        <h2 class="section-title">Tactical Insights</h2>
+        <div class="insights-grid">
+          <div class="insight-card">
+            <div class="insight-icon">🎯</div>
+            <h3>Formation Analysis</h3>
+            <p>Team predominantly used 4-3-3 formation with high pressing in attacking third.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">⚡</div>
+            <h3>Key Moments</h3>
+            <p>3 major counter-attacks led to scoring opportunities. Peak performance in 2nd half.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">🛡️</div>
+            <h3>Defensive Strategy</h3>
+            <p>Strong defensive line with 89% successful tackles and interceptions.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">🔥</div>
+            <h3>Heat Zones</h3>
+            <p>Most active zones: Left wing (35%) and Central midfield (42%).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Actions -->
+      <div class="stats-actions">
+        <a href="upload.html" class="btn btn-primary"><span>📹</span> Analyze New Video</a>
+        <button class="btn btn-secondary" id="refreshStats"><span>🔄</span> Refresh Statistics</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 DeepVision Soccer. Final Year Project.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/statistics.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# Node / frontend
+node_modules/
+
+# Python virtual envs
+venv/
+env/
+.venv/
+football-analysis-backend/foot/footmodel/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Env files (secrets)
+.env
+.env.local
+
+# Build output
+dist/
+build/
+
+# VS Code
+.vscode/

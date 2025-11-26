@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fixtures - DeepVision Soccer</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
+      background: #232533;
+      margin: 0;
+      color: #f6f7fb;
+      min-height: 100vh;
+    }
+    body:before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      background: url('C:/Users/Soham Harip/OneDrive/Desktop/football-analysis-frontend/images/background.jpeg') center center/cover no-repeat;
+      filter: blur(8px) brightness(0.85);
+      opacity: 0.64;
+      will-change: opacity, filter;
+    }
+    .navbar {
+      background: rgba(15,16,32,0.96);
+      padding: 0;
+      height: 74px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-width: 100vw;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1700px;
+      width: 98vw;
+      margin: 0 auto;
+      height: 7px;
+    }
+    .logo {
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 140px;
+      letter-spacing: -1.2px;
+    }
+    .logo-icon { font-size: 1.6em; }
+    .logo-text { font-size: 1.17em; font-weight: 800; letter-spacing: 0.02em;}
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      padding: 0 2px 0 0;
+      margin: 0;
+      font-weight: 500;
+      height: 74px;
+      align-items: center;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: #e2e5f7;
+      padding: 13px 24px;
+      border-radius: 19px;
+      transition: background 0.18s, color 0.18s;
+      font-size: 1.06rem;
+      font-weight: 500;
+      line-height: 1.55rem;
+      display: flex;
+      align-items: center;
+      letter-spacing: .01em;
+      height: 50px;
+    }
+    .nav-link.active, .nav-link:hover {
+      background: linear-gradient(90deg,#c11c1c 60%,#c72020 120%);
+      color: #fff;
+      text-shadow:0 1px 8px #23255544;
+    }
+
+    /* ------- Fixtures/glass table remains as in previous answer ------- */
+    .fixtures-section {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 0 32px 0;
+      background: rgba(32, 34, 58, 0.74);
+    }
+    .fixtures-container {
+      background: rgba(255,255,255,0.09);
+      margin: 0 auto;
+      padding: 28px 30px 26px 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 25px #1112241a;
+      max-width: 1700px;
+      width: 98%;
+      min-height: 600px;
+      backdrop-filter: blur(7px);
+      border: 1.5px solid rgba(96,107,138,0.18);
+    }
+    .page-title {
+      margin-top: 0;
+      margin-bottom: 6px;
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: #fff;
+      text-shadow: 0 4px 22px #14163845;
+    }
+    .page-subtitle {
+      font-size: 1.15em;
+      color: #e7eaf9;
+      margin-bottom: 26px;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+    .fixtures-controls {
+      display: flex;
+      gap: 24px;
+      align-items: flex-end;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .control-group { display: flex; flex-direction: column; gap: 8px;}
+    .control-group label {
+      font-size: 1em;
+      font-weight: 500;
+      color: #d8dafc;
+      margin-bottom: 2px;
+      padding-left: 3px;
+    }
+    .control-group select {
+      font-size: 1.06rem;
+      padding: 9px 15px;
+      background: rgba(245,247,255,0.17);
+      border: solid 1.5px #7ba5ef44;
+      box-shadow: 0 1px 6px #1a247011;
+      border-radius: 11px;
+      color: #fff;
+      outline: none;
+      transition: border 0.18s;
+      font-weight: 500;
+      min-width: 200px;
+      backdrop-filter: blur(2px);
+    }
+    .control-group select:focus {
+      border: solid 2px #d22e21;
+      background: #353868;
+    }
+    .btn.btn-primary {
+      font-size: 1.09rem;
+      padding: 12px 32px;
+      background: linear-gradient(90deg,#b82020 10%,#d11f1f 120%);
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 15px;
+      letter-spacing: .02em;
+      cursor: pointer;
+      box-shadow: 0 4px 16px #a33e2c22;
+      transition: background .15s;
+      margin-left: 14px;
+    }
+    .btn.btn-primary:hover {
+      background: linear-gradient(80deg,#e11a1a 30%,#d22424 140%);
+      color:#e6e8ff;
+    }
+    .fixtures-table-card {
+      background: rgba(245,245,255,0.12);
+      border-radius: 17px;
+      box-shadow: 0 2px 12px #20216b2a;
+      padding: 20px 18px 30px 18px;
+      border: 1.3px solid rgba(96,107,168,0.10);
+    }
+    .table-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 22px;
+      font-size: 1.22em;
+      color: #e9eafb;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+    .table-wrapper {
+      overflow-x: auto;
+      background: rgba(0,0,0,0.09);
+      border-radius: 10px;
+      margin-top: 4px;
+    }
+    .fixtures-table {
+      width: 1600px;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 2px;
+      background: transparent;
+      font-size: 1.1rem;
+    }
+    .fixtures-table thead th {
+      padding: 10px 10px 10px 8px;
+      background: rgba(138, 180, 255, 0.13);
+      color: #fff;
+      font-weight: 700;
+      border-bottom: 2px solid #e55b4e56;
+      text-align: left;
+      font-size: 1.01em;
+      white-space: nowrap;
+    }
+    .fixtures-table tbody td {
+      padding: 15px 9px;
+      border-bottom: 1px solid #ec6f5328;
+      color: #f8f3ee;
+      white-space: nowrap;
+    }
+    .fixtures-table tbody tr:hover {
+      background: rgba(216,54,44,0.13);
+      box-shadow: 0 2px 10px #d13d2222;
+    }
+    .fixtures-table img {
+      border-radius: 40%;
+      vertical-align: middle;
+      margin-bottom: 2px;
+      margin-right: 4px;
+      background: #ffeaea44;
+      box-shadow: 0px 0px 4px #f9bebd25;
+      height: 28px; width: 28px;
+    }
+    .fixtures-table td[style*="font-weight:600"] {
+      font-size: 1.20em;
+      letter-spacing: .02em;
+      color: #fff;
+      text-shadow: 0 2px 12px #a33e2c22;
+      white-space: nowrap;
+    }
+    .fixtures-table .status {
+      padding: 5px 10px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: .96em;
+      background: linear-gradient(90deg,#ea575711,#fc8a8a07 80%);
+      color: #ffd3d3;
+      letter-spacing: .02em;
+      box-shadow: 0 2px 10px #ff616112;
+      white-space: nowrap;
+    }
+    .fixtures-notes {
+      margin-top: 20px;
+      color:#d6b3ad;
+      font-size: .97em;
+      text-align: right;
+      text-shadow: 0 0 16px #2226;
+    }
+    @media (max-width: 1750px){ 
+      .fixtures-container{max-width:98vw;}
+      .fixtures-table{width:1250px;}
+    }
+    @media (max-width: 1350px){ 
+      .fixtures-table{width:1050px;}
+      .fixtures-container{padding:20px 2px;}
+    }
+    @media (max-width: 1100px){ .fixtures-container{padding:20px 5px;}}
+    @media (max-width: 700px){
+      .fixtures-section{padding:10px 0;}
+      .fixtures-controls{flex-direction: column;gap:10px;}
+      .fixtures-table th,.fixtures-table td{font-size:.86em;}
+      .fixtures-container{padding:10px 2px;}
+      .fixtures-table-card{padding:10px 3px;}
+      .page-title{font-size:2em;}
+      .table-header{font-size:1em;}
+      .fixtures-table{width:750px;}
+      .nav-link {padding:10px 10px; font-size:.98em;}
+      .logo {font-size:1.08em;}
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">⚽</span>
+        <span class="logo-text">DeepVision Soccer</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="upload.html" class="nav-link">Upload Video</a></li>
+        <li><a href="output.html" class="nav-link">Output</a></li>
+        <li><a href="fixtures.html" class="nav-link active">Fixtures</a></li>
+        <li><a href="standings.html" class="nav-link">Standings</a></li>
+        <li><a href="statistics.html" class="nav-link">Statistics</a></li>
+      </ul>
+    </div>
+  </nav>
+  <section class="fixtures-section">
+    <div class="fixtures-container">
+      <h1 class="page-title">Upcoming & Live Fixtures</h1>
+      <p class="page-subtitle">View live, upcoming, and recently finished football matches.</p>
+      <div class="fixtures-controls">
+        <div class="control-group">
+          <label for="leagueSelect">League</label>
+          <select id="leagueSelect">
+            <option value="39" selected>Premier League</option>
+            <option value="140">La Liga</option>
+            <option value="78">Bundesliga</option>
+            <option value="135">Serie A</option>
+            <option value="61">Ligue 1</option>
+            <option value="94">Liga Portugal</option>
+            <option value="325">I-League</option>
+            <option value="307">Saudi Pro League</option>
+            <option value="3">Europa League</option>
+            <option value="2">Champions League</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="seasonSelect">Season</label>
+          <select id="seasonSelect">
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023" selected>2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+          </select>
+        </div>
+        <button id="refreshFixtures" class="btn btn-primary">🔄 Refresh</button>
+      </div>
+      <div class="fixtures-table-card">
+        <div class="table-header">
+          <h2 id="tableTitle">Fixtures</h2>
+        </div>
+        <div class="table-wrapper">
+          <table class="fixtures-table" id="fixturesTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>League</th>
+                <th>Status</th>
+                <th>Home</th>
+                <th></th>
+                <th>Away</th>
+                <th>Venue</th>
+                <th>Round</th>
+              </tr>
+            </thead>
+            <tbody id="fixturesBody">
+              <!-- JS fills rows here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="fixtures-notes">
+        <p>Match status keys: NS = Not Started, 1H = First Half, FT = Finished, etc.
+          <a href="#" onclick="alert('Status Codes:\\nNS = Not Started\\n1H = First Half, Kick Off\\nHT = Halftime\\n2H = Second Half\\nET = Extra Time\\nPEN = Penalty\\nFT = Full Time\\nAET = After Extra Time\\nPST = Postponed\\nCANC = Cancelled\\nABD = Abandoned\\nAWD = Awarded\\nWO = WalkOver\\nLIVE = Live')">See all</a>.</p>
+      </div>
+    </div>
+  </section>
+  <footer class="footer" style="text-align:center;padding:16px 0 10px;font-size:.99em;background:none;color:#aab3c3;">
+    &copy; 2025 DeepVision Soccer. Final Year Project.
+  </footer>
+  <script src="js/fixtures.js"></script>
+</body>
+</html>

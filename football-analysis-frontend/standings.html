@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>League Standings - DeepVision Soccer</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">⚽</span>
+        <span class="logo-text">DeepVision Soccer</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="upload.html" class="nav-link">Upload Video</a></li>
+        <li><a href="output.html" class="nav-link">Output</a></li>
+        <li><a href="standings.html" class="nav-link">Fixtures</a></li>
+        <li><a href="fixtures.html" class="nav-link active">Standings</a></li>
+        <li><a href="statistics.html" class="nav-link">Statistics</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Standings Section -->
+  <section class="standings-section">
+    <div class="standings-container">
+      <h1 class="page-title">League Standings</h1>
+      <p class="page-subtitle">Current season tables for top competitions</p>
+      <!-- Controls -->
+      <div class="standings-controls">
+        <div class="control-group">
+          <label for="leagueSelect">League</label>
+          <select id="leagueSelect">
+            <option value="39">Premier League</option>
+            <option value="140">La Liga</option>
+            <option value="78">Bundesliga</option>
+            <option value="135">Serie A</option>
+            <option value="61">Ligue 1</option>
+            <option value="94">Liga Portugal</option>
+            <option value="325">I-League</option>
+            <option value="307">Saudi Pro League</option>
+            <option value="3">Europe: UEFA Europa League</option>
+            <option value="2">Europe: Champions League</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="seasonSelect">Season</label>
+          <select id="seasonSelect">
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+          </select>
+        </div>
+        <button id="refreshStandings" class="btn btn-primary">🔄 Refresh</button>
+      </div>
+
+      <!-- Standings Table Card -->
+      <div class="standings-card">
+        <div class="table-header">
+          <h2 id="tableTitle">Standings</h2>
+          <div class="legend">
+            <span class="legend-item legend-ucl">UCL</span>
+            <span class="legend-item legend-uel">UEL</span>
+            <span class="legend-item legend-relegation">Relegation</span>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="standings-table" id="standingsTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Team</th>
+                <th>Logo</th>
+                <th>P</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>GF</th>
+                <th>GA</th>
+                <th>GD</th>
+                <th>Pts</th>
+                <th>Form</th>
+                <th>Status</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="standingsBody">
+              <!-- Filled by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <div class="last-updated">Last updated: <span id="lastUpdated">--</span></div>
+          <button id="exportStandings" class="btn btn-secondary btn-small">📥 Export CSV</button>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="standings-notes">
+        <p>Legend: UCL – Champions League spots, UEL – Europa League spots, Relegation – Bottom zone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 DeepVision Soccer. Final Year Project.</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="js/main.js"></script>
+  <script src="js/standings.js"></script>
+</body>
+</html>

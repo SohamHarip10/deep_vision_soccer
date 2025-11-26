@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output Videos - DeepVision Soccer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            min-height: 100vh; /* keeps content at least page height */
+            display: flex;
+            flex-direction: column;
+            background: #151824;
+        }
+        .output-section {
+            flex: 1; /* takes up all available vertical space */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .output-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+        #outputVideos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+        }
+        .footer {
+            width: 100%;
+            background: #181c27;
+            color: #fac;
+            text-align: center;
+            font-size: 1em;
+            letter-spacing: 0.02em;
+            padding: 20px 0 16px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚽</span>
+                <span class="logo-text">DeepVision Soccer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="upload.html" class="nav-link">Upload Video</a></li>
+                <li><a href="output.html" class="nav-link active">Output</a></li>
+                <li><a href="fixtures.html" class="nav-link">Fixtures</a></li>
+                <li><a href="standings.html" class="nav-link">Standings</a></li>
+                <li><a href="statistics.html" class="nav-link">Statistics</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="output-section">
+        <div class="output-container">
+            <h1 class="page-title">Processed Output Videos</h1>
+            <div id="outputVideos"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 DeepVision Soccer. Final Year Project.</p>
+    </footer>
+    <script src="js/output.js"></script>
+</body>
+</html>
