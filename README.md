@@ -57,8 +57,3 @@ pip install -r requirements.txt
 python app.py
 
 6. Open index.html in your browser and start uploading/analyzing videos!
-
-
-
-
-
