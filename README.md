@@ -28,14 +28,14 @@ An AI-powered web application for automated football match analysis and live tac
 
 ## 📂 Project Structure 
 
-deepvision-soccer/
-│
-├── uploaded_videos/        # Raw input videos
-├── output_videos/          # Annotated analysis results
-├── js/ css/ templates/     # Frontend files
-├── app.py                  # Flask backend & API routes
-├── models/ utils/          # AI/ML modules
-└── README.md
+- deepvision-soccer/
+- │
+- ├── uploaded_videos/        # Raw input videos
+- ├── output_videos/          # Annotated analysis results
+- ├── js/ css/ templates/     # Frontend files
+- ├── app.py                  # Flask backend & API routes
+- ├── models/ utils/          # AI/ML modules
+- └── README.md
 
 ## 🚀 Installation & Setup  
 ```bash
