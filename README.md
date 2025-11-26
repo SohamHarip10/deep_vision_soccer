@@ -15,12 +15,14 @@ An AI-powered web application for automated football match analysis and live tac
 
 ## 🛠 Tech Stack
 
-**Frontend:** HTML, CSS, JavaScript
-**Backend:** Flask (Python)
-**Models/AI:** PyTorch, OpenCV, Supervision, custom computer vision
-**External API:** API-Football
-**Video Storage:** Filesystem folders (uploaded_videos, output_videos)
-**Deployment:** Local/Server (Python 3.x, Flask)
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Flask (Python)
+- **Models/AI:** PyTorch, OpenCV, Supervision, custom computer vision
+- **External API:** API-Football
+- **Video Storage:** Filesystem folders (uploaded_videos, output_videos)
+- **Deployment:** Local/Server (Python 3.x, Flask)
+
+## 👥 Contributors
 
 ---
 
@@ -56,7 +58,7 @@ python app.py
 
 6. Open index.html in your browser and start uploading/analyzing videos!
 
----
 
-## 👥 Contributors
+
+
 
