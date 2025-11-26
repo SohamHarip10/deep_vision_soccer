@@ -36,6 +36,7 @@ deepvision-soccer/
 └── README.md
 
 ## 🚀 Installation & Setup  
+```bash
 1. Clone the repository - 
 git clone https://github.com/yourusername/deepvision-soccer.git
 cd deepvision-soccer
