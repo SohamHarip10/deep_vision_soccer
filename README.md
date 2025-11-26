@@ -6,10 +6,10 @@ An AI-powered web application for automated football match analysis and live tac
 
 ## 📌 Features
 
-✅ **Video Upload & Analysis** - Upload match videos and receive annotated outputs showing players, ball tracking, and formations
-✅ **Live Statistics** - View up-to-date league standings, fixtures, and detailed player stats from API-Football.
-✅ **Output Management** - Stream, download, or delete analyzed match videos directly from the browser.
-✅ **Responsive UI** - Clean, modern interface with dynamic JavaScript features.
+- ✅ **Video Upload & Analysis** - Upload match videos and receive annotated outputs showing players, ball tracking, and formations
+- ✅ **Live Statistics** - View up-to-date league standings, fixtures, and detailed player stats from API-Football.
+- ✅ **Output Management** - Stream, download, or delete analyzed match videos directly from the browser.
+- ✅ **Responsive UI** - Clean, modern interface with dynamic JavaScript features.
 
 ---
 
